@@ -1,7 +1,8 @@
 import React from "react";
+import {ITodo} from "../interfaces";
 
 type TodoListProps = {
-  todos: any[]
+  todos: ITodo[]
 }
 
 const TodoList: React.FC<TodoListProps> = ({todos}) => {
@@ -9,10 +10,10 @@ const TodoList: React.FC<TodoListProps> = ({todos}) => {
     <ul>
       {todos.map(todo => {
         return (
-          <li>
-            <label>
-              <input type="checkbox"/>
-              <span>123</span>
+          <li key={todo.id}>
+            <label style={{display: 'flex'}}>
+              <input type="checkbox" checked={todo.completed}/>
+              <span>{todo.title}</span>
               <i className="material-icons red-text">delete</i>
             </label>
           </li>
