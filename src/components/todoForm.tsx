@@ -1,6 +1,10 @@
-import React, {useState, useRef} from "react";
+import React, {useState} from "react";
 
-const TodoForm: React.FC = () => {
+interface TodoFormProps {
+  onAdd(title: string): void
+}
+
+const TodoForm: React.FC<TodoFormProps> = ({onAdd}) => {
   const [title, setTitle] = useState<string>('');
   //const myRef = useRef<HTMLInputElement>(null); // для примера
 
@@ -12,7 +16,7 @@ const TodoForm: React.FC = () => {
     if (event.key === 'Enter') {
       //console.log(myRef.current!.value);
       //myRef.current!.value = '';
-      console.log(title);
+      onAdd(title);
       setTitle('');
     }
   };
