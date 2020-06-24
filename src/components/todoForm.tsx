@@ -2,7 +2,7 @@ import React, {useState, useRef} from "react";
 
 const TodoForm: React.FC = () => {
   const [title, setTitle] = useState<string>('');
-  const myRef = useRef(null);
+  //const myRef = useRef<HTMLInputElement>(null); // для примера
 
   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value)
@@ -10,6 +10,8 @@ const TodoForm: React.FC = () => {
 
   const onKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
+      //console.log(myRef.current!.value);
+      //myRef.current!.value = '';
       console.log(title);
       setTitle('');
     }
@@ -20,7 +22,7 @@ const TodoForm: React.FC = () => {
       <input
         onChange={onChangeInput}
         onKeyPress={onKeyPress}
-        ref={myRef}
+        // ref={myRef}
         type="text"
         id="title"
         placeholder="Todo item name"
