@@ -17,12 +17,33 @@ const App: React.FC = () => {
     setTodos(prev => [newTodo, ...prev]);
   };
 
+  const onToggleCheckbox = (id: number) => {
+    setTodos(prev => prev.map(todo => {
+      if (todo.id === id) {
+        todo.completed = !todo.completed;
+      }
+
+      return todo
+    }))
+  };
+
+  const onRemoveTodo = (id: number) => {
+    const confirmRemove = window.confirm('Todo item will be removed');
+    if (confirmRemove) {
+      setTodos(prev => prev.filter(todo => todo.id !== id))
+    }
+  };
+
   return (
     <React.Fragment>
       <Navbar/>
       <div className="container">
         <TodoForm onAdd={onAddTodo}/>
-        <TodoList todos={todos}/>
+        <TodoList
+          todos={todos}
+          onRemoveTodo={onRemoveTodo}
+          onToggleCheckbox={onToggleCheckbox}
+        />
       </div>
     </React.Fragment>
   );
