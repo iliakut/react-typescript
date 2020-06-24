@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Navbar from "./components/navbar";
 import TodoForm from "./components/todoForm";
 import TodoList from "./components/todoList";
@@ -7,6 +7,15 @@ import {ITodo} from "./interfaces";
 // тип FC - функциональный компонент
 const App: React.FC = () => {
   const [todos, setTodos] = useState<ITodo[]>([]);
+
+  useEffect(() => {
+    const saved: ITodo[] = JSON.parse(localStorage.getItem('todos') || '[]');
+    setTodos(saved);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  });
 
   const onAddTodo = (title: string) => {
     const newTodo: ITodo = {
